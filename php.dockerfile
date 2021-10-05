@@ -11,3 +11,8 @@ RUN chown laravel:laravel /var/www/html
 WORKDIR /var/www/html
 
 RUN docker-php-ext-install pdo pdo_mysql
+
+RUN curl -sS https://getcomposer.org/installer | php -- \
+--install-dir=/usr/bin --filename=composer
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
