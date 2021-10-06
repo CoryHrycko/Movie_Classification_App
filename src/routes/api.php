@@ -16,7 +16,13 @@ use App\Http\Controllers\QuotationController;
 |
 */
 
+// Movies
+Route::Resource('/movie', MovieController::class);
+
+// Users
 
 Route::group(['prefix' => 'authorized', 'middleware' => 'CORS'], function ($router) {
+
+
 
 });
