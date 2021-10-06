@@ -8,6 +8,9 @@ services:
     build:
       context: .
       dockerfile: nginx.dockerfile
+      args:
+        - NGINXUSER=${NGINXUSER:-www-data}
+        - NGINXGROUP=${NGINXGROUP:-www-data}
     container_name: nginx
     ports:
       - 80:80
@@ -22,16 +25,14 @@ services:
       - laravel
 
   mysql:
-    image: mysql:5.7.29
+    image: mariadb:10.6
     container_name: mysql
     restart: unless-stopped
     tty: true
     ports:
       - 3306:3306
-    volumes:
-    - ./mysql:/var/lib/mysql
     environment:
-      MYSQL_DATABASE: homestead
+      MYSQL_DATABASE: laravel
       MYSQL_USER: root
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
@@ -44,6 +45,9 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     container_name: php
     volumes:
       - ./src:/var/www/html:delegated
@@ -63,13 +67,16 @@ services:
     build:
       context: .
       dockerfile: composer.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     container_name: composer
     volumes:
       - ./src:/var/www/html
     working_dir: /var/www/html
     depends_on:
       - php
-    user: root
+    user: ${PHPUSER:-www-data}
     entrypoint: ['composer', '--ignore-platform-reqs']
     networks:
       - laravel
@@ -91,13 +98,15 @@ services:
     build:
       context: .
       dockerfile: php.dockerfile
+      args:
+        - PHPUSER=${PHPUSER:-www-data}
+        - PHPGROUP=${PHPGROUP:-www-data}
     container_name: artisan
     volumes:
       - ./src:/var/www/html:delegated
     depends_on:
       - mysql
     working_dir: /var/www/html
-    user: root
     entrypoint: ['php', '/var/www/html/artisan']
     networks:
       - laravel
