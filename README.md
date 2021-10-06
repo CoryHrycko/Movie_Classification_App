@@ -18,8 +18,8 @@ FrontEnd Packages: None, Just native web API's\
 ## Run me
  1) Make in the root directory a folder called: mysql
  2) docker-compose up -d --build site
- 3) docker-compose exec php php /var/www/html/artisan migrate
- 4) docker-compose exec php composer require laravel/sanctum
+ 3) docker-compose run --rm artisan migrate
+ 4) docker-compose run --rm composer require laravel/sanctum
  5) php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
  6) docker-compose exec php php /var/www/html/artisan migrate
  7) Work in progress....
