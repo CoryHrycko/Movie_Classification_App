@@ -2,7 +2,7 @@
 
 namespace Tests\Unit;
 
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class MovieTest extends TestCase
 {
@@ -19,7 +19,7 @@ class MovieTest extends TestCase
     {
         // needs to use the user to save the movie
 
-        $user = $this->makeUser() //
+        $user = $this->makeUser(); //
 
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -38,7 +38,7 @@ class MovieTest extends TestCase
     {
         // needs to use the user to see the movie
 
-        $user = $this->makeUser() //
+        $user = $this->makeUser(); //
 
         $response = $this->actingAs($user, 'api')->json(
             'GET',
@@ -54,7 +54,7 @@ class MovieTest extends TestCase
     {
         // needs to use the user to update the movie
 
-        $user = $this->makeUser() //
+        $user = $this->makeUser(); //
 
         $response = $this->actingAs($user, 'api')->json(
             'POST',
