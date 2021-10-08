@@ -22,6 +22,7 @@ class MovieTest extends TestCase
 
         $user = User::factory()->create(); //
 
+
         $response = $this->post('/login', [
             'email' => $user->email,
             'password' => 'password',
@@ -29,12 +30,18 @@ class MovieTest extends TestCase
 
         // dd($user);
 
-        $input = [];
+        $input = [
+                'title'         => 'star wars',
+                'format'        => 'dvd',
+                'length'        => 500,
+                'release_year'  => 2018,
+                'rating'        => 5,
+            ];
 
         $response = $this->actingAs($user, 'api')->json(
             'POST',
             'api/movie',
-            ['data' => $input]
+            $input
         )
         
         ->assertCreated();

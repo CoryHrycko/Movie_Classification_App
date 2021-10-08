@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use App\Http\Requests\MovieStoreRequest;
 
 class MovieController extends Controller
 {
@@ -22,19 +24,20 @@ class MovieController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Http\Requests\MovieStoreRequest  $request
+     * @return \Illuminate\Http\Response 
      */
-    public function store(Request $request)
+    public function store(MovieStoreRequest $request)
     {
-        //
+        $movie = Movie::create($request->validated());
+        return response()->json($movie, Response::HTTP_CREATED);
     }
 
     /**
