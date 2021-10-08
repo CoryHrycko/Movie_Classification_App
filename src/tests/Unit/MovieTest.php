@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\User;
 use Tests\TestCase;
 
 class MovieTest extends TestCase
@@ -19,7 +20,16 @@ class MovieTest extends TestCase
     {
         // needs to use the user to save the movie
 
-        $user = $this->makeUser(); //
+        $user = User::factory()->create(); //
+
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        // dd($user);
+
+        $input = [];
 
         $response = $this->actingAs($user, 'api')->json(
             'POST',
@@ -37,8 +47,15 @@ class MovieTest extends TestCase
     public function index_happy_path()
     {
         // needs to use the user to see the movie
+        $user = User::factory()->create(); //
 
-        $user = $this->makeUser(); //
+        $response = $this->post('/login', [
+            'email' => $user->email,
+            'password' => 'password',
+        ]);
+
+        dd($user);
+
 
         $response = $this->actingAs($user, 'api')->json(
             'GET',
@@ -65,6 +82,6 @@ class MovieTest extends TestCase
 
     private function makeUser()
     {
-        return factory(\App\Users::class)->make();
+        return User::factory()->make();;
     } 
 }

@@ -33,7 +33,7 @@ services:
       - 3306:3306
     environment:
       MYSQL_DATABASE: laravel
-      MYSQL_USER: root
+      MYSQL_USER: www-data
       MYSQL_PASSWORD: secret
       MYSQL_ROOT_PASSWORD: secret
       SERVICE_TAGS: dev
