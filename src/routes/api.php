@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\QuotationController;
 use \App\Http\Controllers\MovieController;
+use App\Http\Controllers\AuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +17,7 @@ use \App\Http\Controllers\MovieController;
 |
 */
 
-// Movies
-Route::Resource('/movie', MovieController::class);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
-// Users
-
-Route::group(['prefix' => 'authorized', 'middleware' => 'CORS'], function ($router) {
-
-
-
-});
+Route::Resource('/movie', MovieController::class)->middleware('auth:sanctum');
