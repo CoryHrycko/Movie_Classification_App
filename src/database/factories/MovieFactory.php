@@ -22,7 +22,11 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'title' => $this->faker->name(),
+            'format' => 'dvd',
+            'length' => rand(0,500),
+            'release_year' => rand(1800,2100), // password
+            'rating' => rand(1,5),
         ];
     }
 }

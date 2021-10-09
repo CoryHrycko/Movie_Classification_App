@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Validation\Rule;
 
 class MovieUpdateRequest extends FormRequest
 {
@@ -26,11 +27,11 @@ class MovieUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
-            'format' => ['required', 'string'], 
-            'length' => ['required', 'Int'], 
-            'release_year' => ['required', 'Int'], 
-            'rating' => ['required', 'Int'], 
+            'title' => ['string', 'between:1,50'],
+            'format' => ['string', Rule::in("VHS", "DVD", "Streaming")], 
+            'length' => ['Int', 'between:0,500'], 
+            'release_year' => ['Int', 'between:1800,2100'], 
+            'rating' => ['Int', 'between:1,5'], 
         ];
     }
 }
