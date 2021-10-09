@@ -19,9 +19,30 @@ FrontEnd Packages: None, Just native web API's\
  1) Make in the root directory a folder called: mysql
  2) docker-compose up -d --build site
  3) docker-compose run --rm artisan migrate
- 4) docker-compose run --rm composer require laravel/sanctum
- 5) php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
- 6) docker-compose exec php php /var/www/html/artisan migrate
- 7) Work in progress....
- 10) Navigate to http://localhost/
- 11) Enjoy
+ 4) docker-compose run --rm npm install
+ 5) docker-compose run --rm npm run dev
+ 6) Navigate to http://localhost/
+ 7) Enjoy
+
+# Operational API Documentation:
+User Required fields for register:
+   > name - string\
+   email - string\
+   password - string
+   
+   
+User Required fields for login:
+   > email - string\
+   password - string
+   
+---
+
+Movie Required fields for Save and Update
+> title - string\
+> format - string list: "VHS", "DVD", or "Streaming"\
+> length - Int\
+> release_year - Int\
+> rating - Int
+
+Dashboard!
+![image](https://user-images.githubusercontent.com/40903917/136645583-2b59b45e-0e52-4849-8475-c67b11e5ab0d.png)
